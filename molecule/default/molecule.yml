@@ -9,9 +9,12 @@ lint:
     config-file: molecule/default/yaml-lint.yml
 platforms:
   - name: instance
-    image: geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible
-    command: ${MOLECULE_DOCKER_COMMAND:-"sleep infinity"}
+    image: openshift/origin
+    command: "start"
     privileged: true
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     pre_build_image: true
 provisioner:
   name: ansible

@@ -1,0 +1,32 @@
+---
+- name: Converge
+  hosts: all
+
+  tasks:
+    - name: Install epel-release
+      yum:
+        name: epel-release
+        state: latest
+
+    - name: Install python-pip
+      yum:
+        name: python-pip
+        state: latest
+
+    - name: Upgrade pip
+      pip:
+        name: pip
+        state: latest
+        extra_args: --upgrade
+
+    - name: Install setuptools
+      pip:
+        name: setuptools
+        state: latest
+        extra_args: --upgrade
+
+    - name: Install OpenShift python client
+      pip:
+        name: openshift
+        version: 0.7.2
+        extra_args: --ignore-installed

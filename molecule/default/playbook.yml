@@ -1,7 +1,11 @@
 ---
 - name: Converge
   hosts: all
-  become: true
+  vars:
+    k8s_kubeconfig: /var/lib/origin/openshift.local.config/master/admin.kubeconfig
+    k8s_resource_namespace: test
+    k8s_manifests:
+      - k8s-manifests/storageclass
 
   roles:
-    - role: geerlingguy.k8s_manifests
+    - role: ansible-role-k8s_manifests
